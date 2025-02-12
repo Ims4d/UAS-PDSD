@@ -31,8 +31,6 @@ def load_data():
     df['days_to_carrier'] = (df['order_delivered_carrier_date'] - df['order_purchase_timestamp']).dt.days
     return df
 
-df = load_data()
-
 def page_1():
     st.title("Beranda")
     st.markdown("""
@@ -40,6 +38,7 @@ def page_1():
         Silakan pilih menu di sebelah kiri untuk melihat detail analisis.
     """)
 
+    df = load_data()
     df['order_purchase_day'] = df['order_purchase_timestamp'].dt.date
     orders_per_day = df.groupby('order_purchase_day').size()
     fig, ax = orders_per_day.subplots(figsize=(12, 6))
