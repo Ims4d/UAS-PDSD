@@ -22,21 +22,9 @@ menu = st.sidebar.radio("",[
     "Distribusi Status Pengiriman",
     "Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui",
     "Pesanan Yang Berhasil Dikirim Dalam Satu Bulan Terakhir",
-    "Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian"
+    "Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian",
+    "Informasi Kelompok"
 ])
-
-# Sidebar Informasi Kelompok
-st.sidebar.markdown("---")
-st.sidebar.subheader("Kelompok 2 - Analisis Pengiriman")
-st.sidebar.markdown("""
-**Anggota Kelompok:**  
-**10123038** - Muhamad Irsad Assopi  
-**10123015** - Yoan Ready Syavera  
-**10123028** - Rizky Al Farid Hafizh  
-**10123020** - Hizkia Imanuel Edho  
-**10123049** - Nur Ain Salimah  
-**10123062** - Wa Ode Syahwa Salsabilah  
-""")
 st.sidebar.markdown("---")
 st.sidebar.markdown("Kelompok 2 PDSD | FTIK UNIKOM | 2025")
 
