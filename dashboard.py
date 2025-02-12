@@ -37,41 +37,37 @@ st.markdown(
 )
 
 # Sidebar Navigasi
-st.sidebar.image("https://via.placeholder.com/150", use_column_width=True)
 st.sidebar.title("Navigasi Dashboard")
 menu = st.sidebar.radio("Pilih Menu:", ["Beranda", "Analisis Data", "Tentang Kelompok"])
 
 # Sidebar Informasi Kelompok
 st.sidebar.markdown("---")
 st.sidebar.subheader("Kelompok 2 - Analisis Pengiriman")
-st.sidebar.markdown(
-    """
-    **Anggota Kelompok:**  
-    📌 **10123038** - Muhamad Irsad Assopi  
-    📌 **10123015** - Yoan Ready Syavera  
-    📌 **10123028** - Rizky Al Farid Hafizh  
-    📌 **10123020** - Hizkia Imanuel Edho  
-    📌 **10123049** - Nur Ain Salimah  
-    📌 **10123062** - Wa Ode Syahwa Salsabilah  
-    """
-)
+st.sidebar.markdown("""
+**Anggota Kelompok:**  
+**10123038** - Muhamad Irsad Assopi  
+**10123015** - Yoan Ready Syavera  
+**10123028** - Rizky Al Farid Hafizh  
+**10123020** - Hizkia Imanuel Edho  
+**10123049** - Nur Ain Salimah  
+**10123062** - Wa Ode Syahwa Salsabilah  
+""")
 st.sidebar.markdown("---")
-st.sidebar.markdown("🚀 **Universitas XYZ** | 2025")
+st.sidebar.markdown("UNIKOM | 2025")
 
 # Konten Halaman
 if menu == "Beranda":
-    st.title("📦 Dashboard Analisis Data Pengiriman Pesanan")
-    st.image("https://via.placeholder.com/800x300", use_column_width=True)
+    st.title("Dashboard Analisis Data Pengiriman Pesanan")
+    st.image("https://via.placeholder.com/800x300", use_container_width=True)
     st.markdown(
         """
-        Selamat datang di Dashboard Analisis Data Pengiriman Pesanan.
         Dashboard ini menyajikan berbagai analisis terkait pengiriman pesanan.
         Silakan pilih menu di sebelah kiri untuk melihat detail analisis.
         """
     )
 
 elif menu == "Analisis Data":
-    st.title("📊 Analisis Data Pengiriman")
+    st.title("Analisis Data Pengiriman")
     
     @st.cache_data
     def load_data():
