@@ -39,14 +39,14 @@ def page_8():
 # Sidebar Navigasi
 st.sidebar.title("Navigasi Dashboard")
 pg = st.navigation([
-    st.Page(page_1),
-    st.Page(page_2),
-    st.Page(page_3),
-    st.Page(page_4),
-    st.Page(page_5),
-    st.Page(page_6),
-    st.Page(page_7),
-    st.Page(page_8)
+    st.Page(page_1, title="Beranda"),
+    st.Page(page_2, title="Rata-rata Waktu Pengiriman Pesanan"),
+    st.Page(page_3, title="Persentase dan Estimasi Keterlambatan Pengiriman"),
+    st.Page(page_4, title="Distribusi Status Pengiriman"),
+    st.Page(page_5, title="Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui"),
+    st.Page(page_6, title="Pesanan Yang Berhasil Dikirim Dalam Satu Bulan Terakhir"),
+    st.Page(page_7, title="Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian"),
+    st.Page(page_8, title="Informasi Kelompok"),
 ])
 pg.run()
 st.sidebar.markdown("---")
