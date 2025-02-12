@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -6,16 +5,48 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import f_oneway
 
-# Set konfigurasi halaman
 st.set_page_config(
     page_title="Dashboard Analisis Data Pengiriman Pesanan",
     layout="wide"
 )
 
-st.sidebar.markdown("Kelompok 2 PDSD | FTIK UNIKOM | 2025")
+@st.cache_data
+def load_data():
+    url = 'https://raw.githubusercontent.com/Ims4d/sementara/refs/heads/main/orders_dataset.csv'
+    df = pd.read_csv(url)
+    df.fillna({
+        'order_approved_at': pd.Timestamp.max, 
+        'order_delivered_carrier_date': pd.Timestamp.max, 
+        'order_delivered_customer_date': pd.Timestamp.max
+    }, inplace=True)
+    date_cols = [
+        'order_purchase_timestamp',
+        'order_approved_at', 
+        'order_delivered_carrier_date',
+        'order_delivered_customer_date',
+        'order_estimated_delivery_date'
+    ]
+    for col in date_cols:
+        df[col] = pd.to_datetime(df[col])
+    df['days_to_carrier'] = (df['order_delivered_carrier_date'] - df['order_purchase_timestamp']).dt.days
+    return df
+
+df = load_data()
 
 def page_1():
     st.title("Beranda")
+    st.markdown("""
+        Dashboard ini menyajikan berbagai analisis terkait pengiriman pesanan.
+        Silakan pilih menu di sebelah kiri untuk melihat detail analisis.
+    """)
+
+    df['order_purchase_day'] = df['order_purchase_timestamp'].dt.date
+    orders_per_day = df.groupby('order_purchase_day').size()
+    fig, ax = orders_per_day.subplots(figsize=(12, 6))
+    ax.title('Order Per Hari')
+    ax.xlabel('Tanggal')
+    ax.ylabel('Banyak Order')
+    st.pyplot(fig)
 
 def page_2():
     st.title("Rata-rata Waktu Pengiriman Pesanan")
@@ -44,26 +75,15 @@ pg = st.navigation({
         st.Page(page_2, title="Rata-rata Waktu Pengiriman"),
         st.Page(page_3, title="Estimasi Keterlambatan Pengiriman"),
         st.Page(page_4, title="Distribusi Status Pengiriman"),
-        st.Page(page_5, title="Rata-rata Waktu Pesanan Dibuat Hingga Disetujui"),
+        st.Page(page_5, title="Rata-rata Waktu Pesanan Dibuat-Disetujui"),
         st.Page(page_6, title="Pesanan Dalam Satu Bulan Terakhir"),
         st.Page(page_7, title="Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian")
     ],
     "Informasi Kelompok": [ st.Page(page_8, title="Anggota Kelompok") ]
 })
+
 pg.run()
 
-# Konten Halaman
-# if menu == "Beranda":
-#     st.title("Dashboard Analisis Data Pengiriman Pesanan")
-#     st.image("https://via.placeholder.com/800x300", use_container_width=True)
-#     st.markdown(
-#         """
-#         Dashboard ini menyajikan berbagai analisis terkait pengiriman pesanan.
-#         Silakan pilih menu di sebelah kiri untuk melihat detail analisis.
-#         """
-#     )
-
-# elif menu == "Analisis Data":
 #     st.title("Analisis Data Pengiriman")
     
 #     @st.cache_data
@@ -83,7 +103,7 @@ pg.run()
 #         df['days_to_carrier'] = (df['order_delivered_carrier_date'] - df['order_purchase_timestamp']).dt.days
 #         return df
     
-#     df = load_data()
+#     
     
 #     st.subheader("📌 Informasi Dataset")
 #     col1, col2 = st.columns(2)
