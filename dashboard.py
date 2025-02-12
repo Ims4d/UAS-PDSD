@@ -12,6 +12,8 @@ st.set_page_config(
     layout="wide"
 )
 
+st.sidebar.markdown("Kelompok 2 PDSD | FTIK UNIKOM | 2025")
+
 def page_1():
     st.title("Beranda")
 
@@ -50,7 +52,7 @@ pg = st.navigation({
     "Informasi Kelompok": [ st.Page(page_8, title="Anggota Kelompok") ]
 })
 pg.run()
-st.sidebar.markdown("Kelompok 2 PDSD | FTIK UNIKOM | 2025")
+
 
 # Konten Halaman
 # if menu == "Beranda":
