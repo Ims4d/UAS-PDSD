@@ -41,7 +41,11 @@ st.sidebar.title("Navigasi Dashboard")
 menu = st.sidebar.radio("",[
     "Beranda",
     "Rata-rata Waktu Yang Dibutuhkan untuk Mengirimkan Pesanan Dari Tanggal Pembelian Hingga Pengiriman Oleh Kurir",
-    "Persentase Pesanan Yang Dikirimkan Terlambat ke Pelanggan Dibandingkan Dengan Estimasi Waktu Pengiriman"
+    "Persentase Pesanan Yang Dikirimkan Terlambat ke Pelanggan Dibandingkan Dengan Estimasi Waktu Pengiriman",
+    "Distribusi Status Pengiriman",
+    "Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui Beserta Faktor Yang Mempengaruhinya"
+    "Banyak Pesanan Yang Berhasil Dikirim Dalam Satu Bulan Terakhir",
+    "Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian"
 ])
 
 # Sidebar Informasi Kelompok
