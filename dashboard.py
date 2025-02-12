@@ -38,21 +38,19 @@ def page_7():
 def page_8():
     st.title("Informasi Kelompok")
 
-# Sidebar Navigasi
 pg = st.navigation({
     "Navigasi Dashboard": [
         st.Page(page_1, title="Beranda"),
-        st.Page(page_2, title="Rata-rata Waktu Pengiriman Pesanan"),
-        st.Page(page_3, title="Persentase dan Estimasi Keterlambatan Pengiriman"),
+        st.Page(page_2, title="Rata-rata Waktu Pengiriman"),
+        st.Page(page_3, title="Estimasi Keterlambatan Pengiriman"),
         st.Page(page_4, title="Distribusi Status Pengiriman"),
-        st.Page(page_5, title="Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui"),
-        st.Page(page_6, title="Pesanan Yang Berhasil Dikirim Dalam Satu Bulan Terakhir"),
+        st.Page(page_5, title="Rata-rata Waktu Pesanan Dibuat Hingga Disetujui"),
+        st.Page(page_6, title="Pesanan Dalam Satu Bulan Terakhir"),
         st.Page(page_7, title="Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian")
     ],
     "Informasi Kelompok": [ st.Page(page_8, title="Anggota Kelompok") ]
 })
 pg.run()
-
 
 # Konten Halaman
 # if menu == "Beranda":
