@@ -13,29 +13,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Gaya CSS untuk tampilan yang lebih modern
-st.markdown(
-    """
-    <style>
-    .css-18e3th9 {
-        padding: 1rem;
-    }
-    .stButton>button {
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 10px;
-    }
-    .stSelectbox {
-        background-color: #f5f5f5;
-    }
-    .stSidebar {
-        background-color: #263238;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # Sidebar Navigasi
 st.sidebar.title("Navigasi Dashboard")
 menu = st.sidebar.radio("",[
