@@ -9,26 +9,46 @@ from scipy.stats import f_oneway
 # Set konfigurasi halaman
 st.set_page_config(
     page_title="Dashboard Analisis Data Pengiriman Pesanan",
-    layout="wide",
-    menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "# This is a header. This is an *extremely* cool app!"
-    }
+    layout="wide"
 )
+
+def page1():
+    st.title("Beranda")
+
+def page2():
+    st.title("Rata-rata Waktu Pengiriman Pesanan")
+
+def page3():
+    st.title("Persentase dan Estimasi Keterlambatan Pengiriman")
+
+def page4():
+    st.title("Distribusi Status Pengiriman")
+
+def page5():
+    st.title("Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui")
+
+def page6():
+    st.title("Pesanan Yang Berhasil Dikirim Dalam Satu Bulan Terakhir")
+
+def page7():
+    st.title("Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian")
+
+def page8():
+    st.title("Informasi Kelompok")
 
 # Sidebar Navigasi
 st.sidebar.title("Navigasi Dashboard")
-menu = st.sidebar.radio("",[
-    "Beranda",
-    "Rata-rata Waktu Pengiriman Pesanan",
-    "Persentase dan Estimasi Keterlambatan Pengiriman",
-    "Distribusi Status Pengiriman",
-    "Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui",
-    "Pesanan Yang Berhasil Dikirim Dalam Satu Bulan Terakhir",
-    "Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian",
-    "Informasi Kelompok"
+pg = st.navigation([
+    st.Page(page1),
+    st.Page(page2),
+    st.Page(page3),
+    st.Page(page4),
+    st.Page(page5),
+    st.Page(page6),
+    st.Page(page7),
+    st.Page(page8)
 ])
+pg.run()
 st.sidebar.markdown("---")
 st.sidebar.markdown("Kelompok 2 PDSD | FTIK UNIKOM | 2025")
 
