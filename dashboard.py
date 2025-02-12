@@ -12,41 +12,41 @@ st.set_page_config(
     layout="wide"
 )
 
-def page1():
+def page_1():
     st.title("Beranda")
 
-def page2():
+def page_2():
     st.title("Rata-rata Waktu Pengiriman Pesanan")
 
-def page3():
+def page_3():
     st.title("Persentase dan Estimasi Keterlambatan Pengiriman")
 
-def page4():
+def page_4():
     st.title("Distribusi Status Pengiriman")
 
-def page5():
+def page_5():
     st.title("Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui")
 
-def page6():
+def page_6():
     st.title("Pesanan Yang Berhasil Dikirim Dalam Satu Bulan Terakhir")
 
-def page7():
+def page_7():
     st.title("Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian")
 
-def page8():
+def page_8():
     st.title("Informasi Kelompok")
 
 # Sidebar Navigasi
 st.sidebar.title("Navigasi Dashboard")
 pg = st.navigation([
-    st.Page(page1),
-    st.Page(page2),
-    st.Page(page3),
-    st.Page(page4),
-    st.Page(page5),
-    st.Page(page6),
-    st.Page(page7),
-    st.Page(page8)
+    st.Page(page_1),
+    st.Page(page_2),
+    st.Page(page_3),
+    st.Page(page_4),
+    st.Page(page_5),
+    st.Page(page_6),
+    st.Page(page_7),
+    st.Page(page_8)
 ])
 pg.run()
 st.sidebar.markdown("---")
