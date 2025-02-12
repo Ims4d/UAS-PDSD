@@ -41,7 +41,7 @@ def page_1():
     df = load_data()
     df['order_purchase_day'] = df['order_purchase_timestamp'].dt.date
     orders_per_day = df.groupby('order_purchase_day').size()
-    fig, ax = orders_per_day.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(12, 6))
     ax.title('Order Per Hari')
     ax.xlabel('Tanggal')
     ax.ylabel('Banyak Order')
