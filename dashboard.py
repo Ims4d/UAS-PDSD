@@ -43,7 +43,7 @@ menu = st.sidebar.radio("",[
     "Rata-rata Waktu Pengiriman Pesanan",
     "Persentase dan Estimasi Keterlambatan Pengiriman",
     "Distribusi Status Pengiriman",
-    "Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui"
+    "Rata-rata Waktu Antara Pesanan Dibuat Hingga Disetujui",
     "Pesanan Yang Berhasil Dikirim Dalam Satu Bulan Terakhir",
     "Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian"
 ])
