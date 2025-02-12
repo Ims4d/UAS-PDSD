@@ -38,7 +38,7 @@ st.markdown(
 
 # Sidebar Navigasi
 st.sidebar.title("Navigasi Dashboard")
-menu = st.sidebar.radio([
+menu = st.sidebar.radio("",[
     "Beranda",
     "Rata-rata Waktu Yang Dibutuhkan untuk Mengirimkan Pesanan Dari Tanggal Pembelian Hingga Pengiriman Oleh Kurir",
     "Persentase Pesanan Yang Dikirimkan Terlambat ke Pelanggan Dibandingkan Dengan Estimasi Waktu Pengiriman"
