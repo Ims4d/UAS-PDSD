@@ -38,12 +38,12 @@ st.markdown(
 
 # Sidebar Navigasi
 st.sidebar.image("https://via.placeholder.com/150", use_column_width=True)
-st.sidebar.title("📌 Navigasi Dashboard")
+st.sidebar.title("Navigasi Dashboard")
 menu = st.sidebar.radio("Pilih Menu:", ["Beranda", "Analisis Data", "Tentang Kelompok"])
 
 # Sidebar Informasi Kelompok
 st.sidebar.markdown("---")
-st.sidebar.subheader("📌 Kelompok 2 - Analisis Pengiriman")
+st.sidebar.subheader("Kelompok 2 - Analisis Pengiriman")
 st.sidebar.markdown(
     """
     **Anggota Kelompok:**  
