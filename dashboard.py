@@ -44,6 +44,18 @@ def page_1():
 
 def page_2():
     st.title("Rata-rata Waktu Pengiriman Pesanan")
+    df = load_data()
+    df['is_late'] = df['order_delivered_customer_date'] > df['order_estimated_delivery_date']
+    late_percentage = (df['is_late'].sum() / len(df)) * 100
+    on_time_percentage = 100 - late_percentage
+    labels = ['Tepat Waktu', 'Terlambat']
+    sizes = [on_time_percentage, late_percentage]
+    colors = ['green', 'red']
+    explode = (0, 0.1)
+    fig, ax = plt.subplots()
+    ax.pie(sizes, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%', startangle=140)
+    ax.set_title('Persentase Pesanan Tepat Waktu vs Terlambat')
+    st.pyplot(fig)
 
 def page_3():
     st.title("Persentase dan Estimasi Keterlambatan Pengiriman")
