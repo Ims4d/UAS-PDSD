@@ -9,6 +9,32 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, r2_score
 
+st.set_page_config(
+    page_title="Dashboard Analisis Data Pengiriman Pesanan",
+    layout="wide"
+)
+
+@st.cache_data
+def load_data():
+    url = 'https://raw.githubusercontent.com/Ims4d/sementara/refs/heads/main/orders_dataset.csv'
+    df = pd.read_csv(url)
+    df.fillna({
+        'order_approved_at': pd.Timestamp.max, 
+        'order_delivered_carrier_date': pd.Timestamp.max, 
+        'order_delivered_customer_date': pd.Timestamp.max
+    }, inplace=True)
+    date_cols = [
+        'order_purchase_timestamp',
+        'order_approved_at', 
+        'order_delivered_carrier_date',
+        'order_delivered_customer_date',
+        'order_estimated_delivery_date'
+    ]
+    for col in date_cols:
+        df[col] = pd.to_datetime(df[col])
+    df['days_to_carrier'] = (df['order_delivered_carrier_date'] - df['order_purchase_timestamp']).dt.days
+    return df
+
 st.set_page_config(page_title="Dashboard Analisis Data Pengiriman Pesanan", layout="wide")
 
 @st.cache_data
@@ -123,14 +149,23 @@ def page_6():
     st.title("Informasi Kelompok")
     st.write("Data tentang anggota kelompok akan ditampilkan di sini.")
 
-pages = {
-    "Beranda": page_1,
-    "Rata-rata Waktu Pengiriman": page_2,
-    "Distribusi Status Pengiriman": page_3,
-    "Rata-rata Waktu Persetujuan": page_4,
-    "Faktor Waktu Persetujuan": page_5,
-    "Informasi Kelompok": page_6
-}
+def page_7():
+    st.title("Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian")
 
-page = st.sidebar.radio("Navigasi Dashboard", list(pages.keys()))
-pages[page]()
+def page_8():
+    st.title("Informasi Kelompok")
+
+pg = st.navigation({
+    "Navigasi Dashboard": [
+        st.Page(page_1, title="Beranda"),
+        st.Page(page_2, title="Rata-rata Waktu Pengiriman"),
+        st.Page(page_3, title="Estimasi Keterlambatan Pengiriman"),
+        st.Page(page_4, title="Distribusi Status Pengiriman"),
+        st.Page(page_5, title="Rata-rata Waktu Pesanan Dibuat-Disetujui"),
+        st.Page(page_6, title="Pesanan Dalam Satu Bulan Terakhir"),
+        st.Page(page_7, title="Perbedaan Waktu Pengiriman Berdasarkan Waktu Pembelian")
+    ],
+    "Informasi Kelompok": [ st.Page(page_8, title="Anggota Kelompok") ]
+})
+
+pg.run()
