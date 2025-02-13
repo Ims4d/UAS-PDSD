@@ -296,6 +296,76 @@ def page_6():
     last_month = df[df['order_delivered_customer_date'] >= pd.Timestamp.now() - pd.Timedelta('30 days')]
     total_delivered = last_month.shape[0]
     st.write(f"Jumlah pesanan yang berhasil dikirim dalam satu bulan terakhir: {total_delivered}")
+    
+    # Menyiapkan data untuk prediksi jumlah pesanan bulan berikutnya
+    df['order_month'] = df['order_delivered_customer_date'].dt.to_period('M')
+    orders_per_month = df.groupby('order_month').size().reset_index(name='order_count')
+    
+    # Konversi periode menjadi angka untuk model ML
+    orders_per_month['order_month'] = orders_per_month['order_month'].astype(str)
+    orders_per_month['order_month'] = pd.to_datetime(orders_per_month['order_month']).map(pd.Timestamp.toordinal)
+    
+    # Model regresi untuk prediksi jumlah pesanan bulan depan
+    X = orders_per_month[['order_month']]
+    y = orders_per_month['order_count']
+    
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = RandomForestRegressor(n_estimators=100, random_state=42)
+    model.fit(X_train, y_train)
+    
+    # Prediksi untuk bulan depan
+    next_month = pd.Timestamp.now().to_period('M') + 1
+    next_month_ordinal = pd.Timestamp(str(next_month)).toordinal()
+    predicted_orders = model.predict([[next_month_ordinal]])[0]
+    
+    st.write(f"Prediksi jumlah pesanan yang akan dikirim bulan depan: {predicted_orders:.0f}")
+    
+    # Visualisasi tren pesanan per bulan
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.plot(orders_per_month['order_month'], orders_per_month['order_count'], marker='o', linestyle='-', label='Data Aktual')
+    ax.scatter(next_month_ordinal, predicted_orders, color='red', label='Prediksi', zorder=3)
+    ax.set_xlabel("Bulan")
+    ax.set_ylabel("Jumlah Pesanan")
+    ax.set_title("Tren Jumlah Pesanan Per Bulan")
+    ax.legend()
+    st.pyplot(fig)
+
+def page_7():
+    st.title("Analisis Waktu Pengiriman Berdasarkan Waktu Pembelian")
+    
+    # Simulasi Data (Bisa diganti dengan membaca file CSV)
+    data = {
+        "purchase_time": ["pagi", "siang", "malam", "pagi", "siang", "malam"],
+        "delivery_time": [11, 8.59, 13.50, 5.12, 18.11, 22.27]  # Waktu pengiriman dalam hari
+    }
+    df = pd.DataFrame(data)
+    
+    # Statistik Deskriptif
+    st.write("### Statistik Deskriptif")
+    st.write(df.groupby("purchase_time")["delivery_time"].describe())
+    
+    # Visualisasi Distribusi Waktu Pengiriman
+    st.write("### Distribusi Waktu Pengiriman Berdasarkan Waktu Pembelian")
+    fig, ax = plt.subplots(figsize=(8, 5))
+    sns.boxplot(x="purchase_time", y="delivery_time", data=df, palette="Set2", ax=ax)
+    ax.set_xlabel("Waktu Pembelian")
+    ax.set_ylabel("Waktu Pengiriman (Hari)")
+    ax.set_title("Distribusi Waktu Pengiriman Berdasarkan Waktu Pembelian")
+    st.pyplot(fig)
+    
+    # Analisis Statistik: ANOVA
+    purchase_groups = [group["delivery_time"].values for name, group in df.groupby("purchase_time")]
+    anova_result = f_oneway(*purchase_groups)
+    
+    st.write("### Hasil Uji ANOVA")
+    st.write(f"F-statistic: {anova_result.statistic}, p-value: {anova_result.pvalue}")
+    
+    # Interpretasi Hasil
+    if anova_result.pvalue < 0.05:
+        st.write("Ada perbedaan signifikan dalam waktu pengiriman berdasarkan waktu pembelian.")
+    else:
+        st.write("Tidak ada perbedaan signifikan dalam waktu pengiriman berdasarkan waktu pembelian.")
+
 
 pg = st.navigation({
     "Navigasi Dashboard": [
@@ -304,7 +374,8 @@ pg = st.navigation({
         st.Page(page_3, title="Estimasi Keterlambatan Pengiriman"),
         st.Page(page_4, title="Distribusi Status Pengiriman"),
         st.Page(page_5, title="Rata-rata Waktu Pesanan Disetujui"),
-        st.Page(page_6, title="Pesanan Dalam Satu Bulan Terakhir")
+        st.Page(page_6, title="Pesanan Dalam Satu Bulan Terakhir"),
+        st.Page(page_6, title="Analisis Waktu Pengiriman Berdasarkan Waktu Pembelian")
     ]
 })
 
