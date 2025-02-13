@@ -375,7 +375,7 @@ pg = st.navigation({
         st.Page(page_4, title="Distribusi Status Pengiriman"),
         st.Page(page_5, title="Rata-rata Waktu Pesanan Disetujui"),
         st.Page(page_6, title="Pesanan Dalam Satu Bulan Terakhir"),
-        st.Page(page_6, title="Analisis Waktu Pengiriman Berdasarkan Waktu Pembelian")
+        st.Page(page_7, title="Analisis Waktu Pengiriman Berdasarkan Waktu Pembelian")
     ]
 })
 
