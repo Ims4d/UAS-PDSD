@@ -82,7 +82,6 @@ def page_2():
 
 def page_3():
     st.title("Estimasi Keterlambatan Pengiriman")
-    st.text("Persentase pesanan yang dikirimkan terlambat ke pelanggan dibandingkan dengan estimasi waktu pengiriman")
     df = load_data()
     
     if 'delivery_duration' not in df.columns:
